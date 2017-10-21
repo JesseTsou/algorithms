@@ -3,21 +3,8 @@
 #include <stdlib.h>
 #include "generate.h"
 #include "sort.h"
+#include "print.h"
 
-int print(int *a, int len)
-{
-	if (len <= 1000)
-	{
-		printf("    ");
-		for (int i = 0; i < len; i ++)
-		{
-			printf("%d ", *(a + i));
-		}
-		printf("\n");
-	}
-
-	return 0;
-}
 
 int main(int argc, char **argv)
 {
@@ -42,7 +29,8 @@ int main(int argc, char **argv)
 		generate_nums(nums, size);
 
 		print(nums, size);
-		insert_sort_fun(nums, size);
+		//insert_sort_fun(nums, size);
+		shell_sort_fun(nums, size);
 		t2 = time(&time2);
 		printf("time2:%d\n", t2);
 

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "sort.h"
+#include "print.h"
 
 /*直接插入排序
  */
@@ -29,6 +30,51 @@ int insert_sort_fun(int a[], int len)
 
 		//printf("%03d:  ", i);
 		//print(a, len);
+	}
+
+	printf("end sort\n");
+	return 0;
+}
+
+/***********************************************************************/
+
+
+/*希尔排序
+ */
+int shell_insert_sort(int a[], int len, int dk)
+{
+	for (int i = dk; i < len; i ++)	
+	{
+		if (a[i] < a[i - dk])
+		{
+			int j = i - dk;
+			int tmp = a[i];
+			a[i] = a[i - dk];
+
+			while (j >= 0 && tmp < a[j])
+			{
+				a[j + dk] = a[j];
+				j -= dk;
+			}
+
+			a[j + dk] = tmp;
+		}
+
+		//printf("%03d:  ", i);
+		//print(a, len);
+	}
+
+	return 0;
+}
+
+int shell_sort_fun(int a[], int len)
+{
+	printf("start %s\n", __FUNCTION__);
+	int b[] = {5,3,1};
+
+	for (int i = 0; i < (sizeof(b)/sizeof(int)); i ++)
+	{
+		shell_insert_sort(a, len, b[i]);
 	}
 
 	printf("end sort\n");
