@@ -67,6 +67,11 @@ int shell_insert_sort(int a[], int len, int dk)
 	return 0;
 }
 
+/*选择一个增量序列t1，t2，…，tk，其中ti>tj，tk=1
+ * 按增量序列个数k，对序列进行k 趟排序
+ * 每次排序，所有距离为增量数值的记录放在同一个组中。先在各组内进行直接插入排序
+ * 直到增量为1,所有序列在一个分组，直接进行插入排序为止
+ */
 int shell_sort_fun(int a[], int len)
 {
 	printf("start %s\n", __FUNCTION__);
