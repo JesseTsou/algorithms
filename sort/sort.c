@@ -20,7 +20,7 @@ int insert_sort_fun(int a[], int len)
 			int tmp = a[i];
 			a[i] = a[i - 1];
 
-			for (; tmp < a[j]; j --)
+			for (; tmp < a[j] && j >= 0; j --)
 			{
 				a[j + 1] = a[j];
 			}
@@ -80,6 +80,109 @@ int shell_sort_fun(int a[], int len)
 	for (int i = 0; i < (sizeof(b)/sizeof(int)); i ++)
 	{
 		shell_insert_sort(a, len, b[i]);
+	}
+
+	printf("end sort\n");
+	return 0;
+}
+
+
+/******************************************************************************/
+
+/*简单选择排序
+ * 选出最小的与第一个位置的作交换
+ * 余下的数中，选出第二小的与第二个位置的作交换
+ * 一直到最终
+ */
+
+int get_min(int a[], int i, int len)
+{
+	int flag = i;
+	for (int j = i + 1; j < len; j ++)
+	{
+		if (a[j] < a[flag]) 
+		{
+			flag = j;
+		}
+	}
+
+	return flag;
+}
+
+int select_sort_fun(int a[], int len)
+{
+	printf("start %s\n", __FUNCTION__);
+
+	int flag = 0;
+	for (int i = 0; i < len ; i ++)
+	{
+		flag = get_min(a, i, len);
+
+		if (flag != i)
+		{
+			int tmp = a[i];
+			a[i] = a[flag];
+			a[flag] = tmp;
+		}
+		//printf("%03d:  ", i);
+		//print(a, len);
+	}
+
+	printf("end sort\n");
+	return 0;
+}
+
+/******************************************************************************/
+
+/*二元选择法
+ * 在二元排序的基础上，一次判断最大值与最小值，分别交换头尾数
+ */
+
+int get_min_max(int a[], int i, int len, int *min, int *max)
+{
+	*min = i;
+	*max = i;
+	for (int j = i + 1; j < len - i; j ++)
+	{
+		if (a[j] < a[*min]) 
+		{
+			*min = j;
+			continue;
+		}
+
+		if (a[j] > a[*max]) 
+		{
+			*max = j;
+		}
+	}
+
+	return 0;
+}
+
+int select_twoele_sort_fun(int a[], int len)
+{
+	printf("start %s\n", __FUNCTION__);
+
+	int min_flag = 0;
+	int max_flag = 0;
+	for (int i = 0; i < len / 2 ; i ++)
+	{
+		get_min_max(a, i, len, &min_flag, &max_flag);
+
+		int tmp = a[i];
+		a[i] = a[min_flag];
+		a[min_flag] = tmp;
+
+		if (max_flag == i)
+		{
+			max_flag = min_flag;
+		}
+
+		tmp = a[len - i - 1];
+		a[len - i - 1] = a[max_flag];
+		a[max_flag] = tmp;
+		//printf("%03d:  ", i);
+		//print(a, len);
 	}
 
 	printf("end sort\n");

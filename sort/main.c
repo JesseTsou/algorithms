@@ -20,6 +20,8 @@ int main(int argc, char **argv)
 
 		print(nums, sizeof(nums)/sizeof(int));
 		insert_sort_fun(nums, sizeof(nums)/sizeof(int));
+		t2 = time(&time2);
+		printf("time2:%d\n", t2);
 		print(nums, sizeof(nums)/sizeof(int));
 	}
 	else
@@ -30,7 +32,9 @@ int main(int argc, char **argv)
 
 		print(nums, size);
 		//insert_sort_fun(nums, size);
-		shell_sort_fun(nums, size);
+		//shell_sort_fun(nums, size);
+		//select_sort_fun(nums, size);
+		select_twoele_sort_fun(nums, size);
 		t2 = time(&time2);
 		printf("time2:%d\n", t2);
 
