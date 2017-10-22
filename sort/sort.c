@@ -209,11 +209,15 @@ int headchange(int a[], int len , int parent)
 
 	while (child < len)
 	{
+		/*取左右结点较大的那个*/
 		if (child + 1 < len && a[child + 1] > a[child])
 		{
 			child ++;
 		}
 
+		/*若大于父结点，则替换
+		 * 然后以较大子结点位置作为父结点，继续比较
+		 */
 		if (a[child] > a[parent])
 		{
 			tmp = a[parent];
@@ -234,6 +238,8 @@ int headchange(int a[], int len , int parent)
 	return 0;
 }
 
+/*建堆
+ */
 int buildheap(int a[], int len)
 {
 	printf("\nbuild heap: \n");
@@ -251,6 +257,8 @@ int sortheap(int a[], int len)
 	printf("\nsort heap: \n");
 	for (int i = len - 1; i > 0 ; i --)
 	{
+		/*将当前根结点替换到最后，即最大值，不参与之后的比较了
+		 */
 		int tmp = a[i];
 		a[i] = a[0];
 		a[0] = tmp;
