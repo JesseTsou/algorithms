@@ -291,8 +291,6 @@ int heap_sort_fun(int a[], int len)
  * 相邻两个进行比较与调整，一轮比较后将最大的（或最小的）放在最后了
  * 然后再比较前面的，直到结束
  */
-
-
 int bubble_sort_fun(int a[], int len)
 {
 	printf("start %s\n", __FUNCTION__);
@@ -315,4 +313,75 @@ int bubble_sort_fun(int a[], int len)
 	return 0;
 }
 
+/*改进1：加入标志位，记录最后一次进行交换的位置，
+ * 下一次就可以交换至此处即可（因为之后的都交换好了）
+ */
+int bubble_sort_fun1(int a[], int len)
+{
+	printf("start %s\n", __FUNCTION__);
 
+	int i = len - 1;
+	int tmp = 0;
+
+	while(i > 0)
+	{
+
+		int pos = 0;
+		for (int j = 0; j < i; j ++)
+		{
+			if (a[j] > a[j + 1])
+			{
+				tmp = a[j];
+				a[j] = a[j + 1];
+				a[j + 1] = tmp;
+				pos = j;
+			}
+		}
+		//print(a, len);
+		//printf("pos:%d\n",pos);
+		i = pos;
+	}
+	
+	printf("end sort\n");
+	return 0;
+}
+
+/*改进2:一次排序时，同时正向、反向冒泡,取得最大最小值
+ */
+int bubble_sort_fun2(int a[], int len)
+{
+	printf("start %s\n", __FUNCTION__);
+
+	int low = 0;
+	int hig = len -1;
+
+	while(hig > low)
+	{
+		for (int j = low; j < hig; j ++)
+		{
+			if (a[j] > a[j + 1])
+			{
+				int tmp = a[j];
+				a[j] = a[j + 1];
+				a[j + 1] = tmp;
+			}
+		}
+
+		hig --;
+
+		for (int j = hig; j > low; j --)
+		{
+			if (a[j] < a[j - 1])
+			{
+				int tmp = a[j];
+				a[j] = a[j - 1];
+				a[j - 1] = tmp;
+			}
+		}
+
+		low ++;
+	}
+
+	printf("end sort\n");
+	return 0;
+}

@@ -12,7 +12,9 @@ int sortbyfun(int nums[], int size)
 	//select_sort_fun(nums, size);
 	//select_twoele_sort_fun(nums, size);
 	//heap_sort_fun(nums, size);
-	bubble_sort_fun(nums, size);
+	//bubble_sort_fun(nums, size);
+	//bubble_sort_fun1(nums, size);
+	bubble_sort_fun2(nums, size);
 	return 0;
 }
 
