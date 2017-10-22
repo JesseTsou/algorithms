@@ -385,3 +385,73 @@ int bubble_sort_fun2(int a[], int len)
 	printf("end sort\n");
 	return 0;
 }
+
+/*快速排序
+ * 选取一个基准点，进行一次比较，将记录分为两部分，
+ * 一部分比基准点小， 一部分比基准点大,此时基准即在排好序的位置
+ * 然后分别对这两部分进行上述排序，直到整个序列有序
+ */
+int swap(int *a, int *b)
+{
+	int tmp = *a;
+	*a = *b;
+	*b = tmp;
+
+	return 0;
+}
+
+int getpoint(int a[], int low, int high, int len)
+{
+	int key = a[low];
+
+	//printf("key:%d,posion:%d\n", key, low);
+	/*由两端向中间进行扫描*/
+	while (low < high)
+	{
+		while(low < high && a[high] >= key)
+		{
+			high --;
+		}
+
+		//将基准点替换至high所在位置,替换后序列之后的点都比基准点大
+		swap(&a[low], &a[high]);
+
+		while (low < high && a[low] <= key)
+		{
+			low ++;
+		}
+
+		//将基准点替换至low所在位置,替换后序列之前的点都比基准点小
+		swap(&a[low], &a[high]);
+	}
+	//printf("getpoint ");
+	//print(a, len);
+
+	return low;
+}
+
+int quick_sort(int a[], int low , int high, int len)
+{
+	if (low < high)
+	{
+		int point = getpoint(a, low, high, len);
+
+		//分为两部分
+		quick_sort(a, low, point - 1, len);
+		quick_sort(a, point + 1, high, len);
+		//printf("qs ");
+		//print(a, len);
+	}
+
+	return 0;
+}
+int quick_sort_fun(int a[], int len)
+{
+	printf("start %s\n", __FUNCTION__);
+
+	quick_sort(a, 0, len -1, len);
+
+	printf("end sort\n");
+	return 0;
+}
+
