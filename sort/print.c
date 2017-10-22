@@ -2,7 +2,7 @@
 
 int print(int *a, int len)
 {
-	if (len <= 1000)
+	if (len <= 2000)
 	{
 		printf("    ");
 		for (int i = 0; i < len; i ++)

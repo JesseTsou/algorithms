@@ -5,6 +5,15 @@
 #include "sort.h"
 #include "print.h"
 
+int sortbyfun(int nums[], int size)
+{
+	//insert_sort_fun(nums, size);
+	//shell_sort_fun(nums, size);
+	//select_sort_fun(nums, size);
+	//select_twoele_sort_fun(nums, size);
+	heap_sort_fun(nums, size);
+	return 0;
+}
 
 int main(int argc, char **argv)
 {
@@ -19,7 +28,7 @@ int main(int argc, char **argv)
 		int nums[] = {100,55,34,12,76,11,13,1,11,6,7,4,7,14};
 
 		print(nums, sizeof(nums)/sizeof(int));
-		insert_sort_fun(nums, sizeof(nums)/sizeof(int));
+		sortbyfun(nums, sizeof(nums)/sizeof(int));
 		t2 = time(&time2);
 		printf("time2:%d\n", t2);
 		print(nums, sizeof(nums)/sizeof(int));
@@ -31,10 +40,7 @@ int main(int argc, char **argv)
 		generate_nums(nums, size);
 
 		print(nums, size);
-		//insert_sort_fun(nums, size);
-		//shell_sort_fun(nums, size);
-		//select_sort_fun(nums, size);
-		select_twoele_sort_fun(nums, size);
+		sortbyfun(nums, size);
 		t2 = time(&time2);
 		printf("time2:%d\n", t2);
 

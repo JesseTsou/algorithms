@@ -189,3 +189,90 @@ int select_twoele_sort_fun(int a[], int len)
 	return 0;
 }
 
+
+/******************************************************************************/
+
+/*堆排序
+ * 首先将数组进行建堆(完全二叉树)(树中任一非叶子结点的关键字均不大于（或不小于）其左右孩子（若存在）结点的关键字):
+ *     从最后一个父结点开始，每个子树的父结点为该子树中最大(或最小)的元素。
+ *     重复执行到根结点。
+ * 然后对堆进行排序：
+ *      从最后一个结点开始，将最后的结点与第一个结点交换，那么最后那个结点就是最大(或最小)的那个，
+ *      然后排除最后那个结点（即最大(或最小)的那个）,将剩余的结点重新建堆（整体建堆）。
+ *      反复执行后，就会依次把大数(或小数)替换到最后，直到遍历到第一个结点，排序完毕。
+ */
+int headchange(int a[], int len , int parent)
+{
+	int child = 2 * parent + 1; 
+//	int child = 0;
+	int tmp = 0;
+
+	while (child < len)
+	{
+		if (child + 1 < len && a[child + 1] > a[child])
+		{
+			child ++;
+		}
+
+		if (a[child] > a[parent])
+		{
+			tmp = a[parent];
+			a[parent] = a[child];
+			a[child] = tmp;
+			parent = child;
+			child = 2 * parent + 1;
+		}
+		else
+		{
+			break;
+		}
+	}
+
+	//printf(" head change ");
+	//print(a, len);
+
+	return 0;
+}
+
+int buildheap(int a[], int len)
+{
+	printf("\nbuild heap: \n");
+	for (int i = (len -1)/2; i >= 0; i --)
+	{
+		headchange(a, len , i);
+	}
+	//print(a, len);
+
+	return 0;
+}
+
+int sortheap(int a[], int len)
+{
+	printf("\nsort heap: \n");
+	for (int i = len - 1; i > 0 ; i --)
+	{
+		int tmp = a[i];
+		a[i] = a[0];
+		a[0] = tmp;
+		/*剩余的重新建堆*/
+		headchange(a, i, 0);
+	//	printf("        all: ");
+	//	print(a, len);
+	}
+	//print(a, len);
+
+	return 0;
+}
+
+int heap_sort_fun(int a[], int len)
+{
+	printf("start %s\n", __FUNCTION__);
+
+	buildheap(a, len);
+	
+	sortheap(a, len);
+
+	printf("end sort\n");
+	return 0;
+}
+
