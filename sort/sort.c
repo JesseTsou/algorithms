@@ -284,3 +284,35 @@ int heap_sort_fun(int a[], int len)
 	return 0;
 }
 
+
+/******************************************************************************/
+
+/*冒泡排序法
+ * 相邻两个进行比较与调整，一轮比较后将最大的（或最小的）放在最后了
+ * 然后再比较前面的，直到结束
+ */
+
+
+int bubble_sort_fun(int a[], int len)
+{
+	printf("start %s\n", __FUNCTION__);
+
+	int tmp = 0;
+	for (int i = 0; i < len - 1; i ++)
+	{
+		for (int j = 0; j < len - 1 - i; j ++)
+		{
+			if (a[j] > a[j + 1])
+			{
+				tmp = a[j];
+				a[j] = a[j + 1];
+				a[j + 1] = tmp;
+			}
+		}
+	}
+
+	printf("end sort\n");
+	return 0;
+}
+
+
