@@ -15,7 +15,8 @@ int sortbyfun(int nums[], int size)
 	//bubble_sort_fun(nums, size);
 	//bubble_sort_fun1(nums, size);
 	//bubble_sort_fun2(nums, size);
-	quick_sort_fun(nums, size);
+	//quick_sort_fun(nums, size);
+	merge_sort_fun(nums, size);
 	return 0;
 }
 

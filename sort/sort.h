@@ -11,5 +11,6 @@ int bubble_sort_fun(int a[], int len);
 int bubble_sort_fun1(int a[], int len);
 int bubble_sort_fun2(int a[], int len);
 int quick_sort_fun(int a[], int len);
+int merge_sort_fun(int a[], int len);
 
 #endif

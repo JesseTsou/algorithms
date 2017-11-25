@@ -400,7 +400,7 @@ int swap(int *a, int *b)
 	return 0;
 }
 
-int getpoint(int a[], int low, int high, int len)
+int getpoint(int a[], int low, int high)
 {
 	int key = a[low];
 
@@ -424,32 +424,111 @@ int getpoint(int a[], int low, int high, int len)
 		//将基准点替换至low所在位置,替换后序列之前的点都比基准点小
 		swap(&a[low], &a[high]);
 	}
-	//printf("getpoint ");
-	//print(a, len);
 
 	return low;
 }
 
-int quick_sort(int a[], int low , int high, int len)
+int quick_sort(int a[], int low , int high)
 {
 	if (low < high)
 	{
-		int point = getpoint(a, low, high, len);
+		int point = getpoint(a, low, high);
 
 		//分为两部分
-		quick_sort(a, low, point - 1, len);
-		quick_sort(a, point + 1, high, len);
-		//printf("qs ");
-		//print(a, len);
+		quick_sort(a, low, point - 1);
+		quick_sort(a, point + 1, high);
 	}
 
 	return 0;
 }
+
 int quick_sort_fun(int a[], int len)
 {
 	printf("start %s\n", __FUNCTION__);
 
-	quick_sort(a, 0, len -1, len);
+	quick_sort(a, 0, len -1);
+
+	printf("end sort\n");
+	return 0;
+}
+
+
+
+/*归并排序
+ */
+
+int merge(int a[], int b[], int i, int m, int n)
+{
+	int j = m + 1;
+	int k = i;
+
+	while (i <= m && j <=n)
+	{
+		if (a[j] < a[i])
+		{
+			b[k] = a[j++];
+		}
+		else
+		{
+			b[k] = a[i++];
+		}
+		k ++;
+	}
+
+	while(i <= m)
+	{
+		b[k++] = a[i++];
+	}
+
+	while(j <= n)
+	{
+		b[k++] = a[j++];
+	}
+
+	return 0;
+}
+
+int merge_sort(int a[], int b[], int len)
+{
+	int sublen = 1;
+	int *q = a;
+	int *tmp = NULL;
+
+	while (sublen < len)
+	{
+		int doubleSublen = 2 * sublen;
+		int i = 0;
+		while(i + doubleSublen < len)
+		{
+			merge(q, b, i, i + sublen - 1, i + doubleSublen - 1);
+			i += doubleSublen;
+		}
+
+		if (i + sublen < len)
+		{
+			merge(q, b, i, i + sublen - 1, len - 1);
+		}
+
+		sublen = doubleSublen;
+
+		tmp = q; 
+		q = b;
+		b = tmp;
+		printf("b: ");
+		print(b,len);
+		printf("q: ");
+		print(q,len);
+	}
+
+	return 0;
+}
+
+int merge_sort_fun(int a[], int len)
+{
+	printf("start %s\n", __FUNCTION__);
+
+	int b[len];
+	merge_sort(a, b, len);
 
 	printf("end sort\n");
 	return 0;
